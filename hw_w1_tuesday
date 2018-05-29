@@ -55,7 +55,7 @@ Part 3
 
 1. True or false: n^2 + n is O(n^2).
  True
-2. True or false: n^2 + n is O(n^3).	*The solutions file seems incorrect?
+2. True or false: n^2 + n is O(n^3).	*Technically true, but not usefully true
  False
 3. True or false: n^2 + n is O(n).
  False
