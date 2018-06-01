@@ -24,6 +24,10 @@ td {
   background-color: blue;
 }
 
+.column-top td:hover {
+  background-color: gold;
+}
+
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 /* column-top is table row of clickable areas for each column */
