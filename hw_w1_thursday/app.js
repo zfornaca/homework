@@ -5,16 +5,10 @@ $(function() {
 
   const start = $('#start')[0];
   $(start).on('click', function() {
-    $('#start-screen').toggle();
-    toggleClasses($('#game-screen')[0], 'hide', 'show');
+    $('#start-screen').toggleClass('show hide');
+    $('#game-screen').toggleClass('show hide');
     startGame();
   });
-
-  function toggleClasses(element) {
-    for (let i = 1; i < arguments.length; i++) {
-      element.classList.toggle(arguments[i]);
-    }
-  }
 
   function startGame() {
     // get random words and append them to the DOM
@@ -69,10 +63,10 @@ $(function() {
 
       // check whether the game is over
       if (similarityScore === password.length) {
-        toggleClasses($('#winner')[0], 'hide', 'show');
+        $('#winner').toggleClass('hide show');
         $(this)[0].off('click', updateGame);
       } else if (guessCount === 0) {
-        toggleClasses($('#loser')[0], 'hide', 'show');
+        $('#loser').toggleClass('hide show');
         $(this)[0].off('click', updateGame);
       }
     }
