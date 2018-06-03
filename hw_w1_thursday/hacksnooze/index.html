@@ -5,8 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hack or Snooze</title>
+  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="shell">
+  <nav>
+    <span class="navTitle">Hack or Snooze</span>
+    <span class="navText" id="submit">Submit</span>
+    <span class="navText" id="pipe">|</span>
+    <span class="navText" id="favs">Favorites</span>
+  </nav>
+
+ <div id="formBox">
+  <form action="" method="post">
+    <p>
+      <label for="siteLabel"><span>title</span></label>
+      <input type="text" id="siteLabel" name="siteLabel" required>
+    </p>
+    <p>
+      <label for="siteURL"><span>url</span></label>
+      <input type="url" id="siteURL" name="siteURL" required>
+    </p>
+    <div class="button">
+      <button type="submit">submit</button>
+    </div>
+  </form>
+</div>
+  <ul>
+  <li class="post">
+    <div class="rank">1</div>
+    <div class="star">☆</div>
+    <div class="postContent">
+      <span class="postTitle"><a href="https://soundcloud.com/you/likes">Soundcloud likes</a></span>
+      <span class="postOrigin">(soundcloud.com)</span>
+    </div>
+  </li>
+
   
+
+  </ul>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
