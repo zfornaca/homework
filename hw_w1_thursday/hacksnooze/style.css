@@ -1,5 +1,4 @@
 body {
-  /* background-color: orange; */
   font-family: 'Rubik', sans-serif;
 }
 
@@ -11,6 +10,10 @@ body {
 nav {
   background-color: orange;
   padding: 1em;
+}
+
+#formBox {
+  display: none;
 }
 
 a {
@@ -59,7 +62,7 @@ label {
 #formBox {
   padding: 1em;
   padding-top: 0.5em;
-  background-color: goldenrod;
+  background-color: orange;
 }
 
 button {

@@ -2,6 +2,13 @@
 var postCount = 0;
 
 // expand/collapse function
+
+$('#submit').on('click', toggleForm);
+
+function toggleForm() {
+  $('#formBox').slideToggle('fast');
+}
+
 // * should happen when 'submit' button clicked
 
 // favorites/all function
@@ -32,13 +39,9 @@ function favSelect(evt) {
     .toggleClass('favorite');
 }
 
-// submit function
-// need to get origin from URL; not sure yet if what I've done works, but "hostname" is a thing
 // TODO:
-// 1) create a subsidiary function to build the new post (function should build out the nested
-//    li structure and return that structure; the newLink function should take that and fill
-//    in the siteLabel, siteURL, and hostName data before appending that li to the ul)
-// 2) the 'origin filter' function should be easy if I get interactivity working on newPost content
+// 1) the 'origin filter' function should be easy if I get interactivity working on newPost content
+
 $('form').on('submit', newLink);
 
 function getHostName(url) {
@@ -69,11 +72,11 @@ function newLink(evt) {
   let siteURL = $('#siteURL').val();
   let hostName = getHostName(siteURL);
   let newPost = buildPost(siteLabel, siteURL, hostName);
-  // console.log($(newPost).find('.star'));
   $(newPost)
     .find('.star')
     .on('click', favSelect);
   $('ul').append(newPost);
+  evt.target.reset();
 }
 
 function buildPost(siteLabel, siteURL, hostName) {
@@ -90,5 +93,3 @@ function buildPost(siteLabel, siteURL, hostName) {
   newPost.append($(postContent));
   return newPost[0];
 }
-
-// origin filter function
