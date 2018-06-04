@@ -1,4 +1,3 @@
-// since I was having problems figuring out how to indent the ol numbers, here's a hack
 var postCount = 0;
 
 // expand/collapse function
@@ -9,9 +8,7 @@ function toggleForm() {
   $('#formBox').slideToggle('fast');
 }
 
-// * should happen when 'submit' button clicked
-
-// favorites/all function
+// favorites/all toggle function
 
 $('#favs').on('click', favFilter);
 
@@ -26,6 +23,7 @@ function favFilter(evt) {
 }
 
 // star/unstar function
+
 $('.star').on('click', favSelect);
 
 function favSelect(evt) {
@@ -39,8 +37,7 @@ function favSelect(evt) {
     .toggleClass('favorite');
 }
 
-// TODO:
-// 1) the 'origin filter' function should be easy if I get interactivity working on newPost content
+// new submission function[s]
 
 $('form').on('submit', newLink);
 
@@ -93,3 +90,9 @@ function buildPost(siteLabel, siteURL, hostName) {
   newPost.append($(postContent));
   return newPost[0];
 }
+
+// TODO:
+// I was able to strip the domain name out of the URL, but not able to filter all
+// <li>s with a given domain name (postOrigin). I was trying to use the contains
+// selector, but it doesn't seem to play nicely with parentheses. Since this was
+// a bonus objective I'm leaving it as is.
