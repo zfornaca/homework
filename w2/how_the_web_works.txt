@@ -1,0 +1,79 @@
+1. What is HTTP?
+HyperText Transfer Protocol. A protocol for client-server communication -- client machine sends HTTP requests ("please give me page content X," etc.) to the server, and the server sends HTTP responses ("here is the page content," etc.) back to the client.
+
+2. What is a URL?
+Universal Resource Locator. The string of characters in the address bar. Includes a lot of things mashed together (protocol (HTTP, etc.), domain name, path, and more.
+
+3. What is TCP?
+Transmission Control Protocol. When a browser needs to send data to another machine over the internet, TCP is the protocol that determines which port that data uses, makes sure received data is complete, and chunks it up into "packets" to send over the internet.
+
+4. What is IP?
+Internet Protocol. In between the server chunking data into packets and the client verifying and reassembling the packets, they have to be sent over the internet, and this determines how those transmissions are routed and how they arrive at their destination. It's ... kind of like IP serves the function of the postal service and TCP serves to function of mailroom office admin.
+
+5. What is DNS?
+Domain Name System. Like a phone book that lets the computer look up the actual IP address based on the domain name. So the same way the phone book will let you look up "Aaron Abramoff" and find a phone number to call, DNS lets your computer look up "www.google.com," get the IP address for Google, and get in touch with Google's IP address.
+
+6. What is idempotent?
+The characteristic of producing the same result every time the operation is called. A function or method is said to be idempotent if it fulfills this criterion.
+
+7. What is a query string?
+The query string is (potentially) part of a URL, after the domain name, port, and path, before the anchor. The query string content can be used for different things depending on the site.
+https://www.google.com/search?q=query+string&oq=query+string&aqs=chrome..69i57j0l5.1780j0j9&sourceid=chrome&ie=UTF-8
+________ _____________ ___________________________________________________________________________________________
+protocol domain name          query string
+
+8. What is a path or route?
+Given a website, it's the structure relative to the root -- in the URL bar, it's what comes after the domain name. For example, in the case of the Query string wiki page:
+https://en.wikipedia.org/wiki/Query_string
+                        __________________
+                         path
+The path is what distinguishes the /wiki/Query_string page from other wikipedia pages.
+
+
+9. List four HTTP Verbs and their use cases.
+GET: a request for something from the server. Everything that goes into the URL bar is by default using GET as its verb.
+POST: pushing content onto the server.
+PUT: changing content that is already on the server
+DELETE: removing content from the server
+
+10. What is a client?
+The machine being operated by the end user, seeking content from the server -- hence its appearance in schematic diagrams as a laptop.
+
+11. What is a server?
+The machine[s] handling requests sent by the client machine and returning responses to it.
+
+12. What is an HTTP request?
+The transmission from client to server.
+
+13. What is an HTTP response?
+The transmission from server to client.
+
+14. What is an HTTP header? Give a couple examples of request and response headers you have seen.
+The information (not intended to be viewed by the end user) sent by client to server and vice versa, dictating how the transmissions are handled.
+
+Example request headers:
+ GET / HTTP.1.1 -- this is a GET request (re: the verbs above)
+ accept: text/html -- the HTTP response can be in text/html format
+Example response headers:
+ HTTP/1.1 200 OK -- the transmission was successful
+ Set-Cookie: whatever -- a cookie ('whatever') is being sent to the client to be stored and sent back later, so that the server has a way of recognizing the client's identity/behavior
+
+15. What is REST?
+REpresentational State Transfer. A style of API -- APIs can qualify as RESTful or not. There are a number of requirements I don't really understand, but it involves "stateless" operations (see #18 below).
+
+16. What is JSON?
+JavaScript Object Notation. Since the HT in HTML and HTTP is hyper*text*  everything we're doing in HTML/HTTP ultimately needs to be communicable as strings, and JSON is a framework for storing non-strings (i.e. objects) as strings in a way that lets us reclaim them in their initial non-string states. It's kind of like dehydrating and rehydrating food. I guess?
+
+17. What happens when you type in "Hello World" in google.com and press enter?
+Well, that question threw me. But okay, hitting enter (or clicking Google Search) sends an HTTP request to Google's servers, and the content of the search box is part of the request the server receives. Google's server returns an HTTP response, which results in my Chrome window displaying the search results.
+
+18. What does it mean when we say the web is "stateless"?
+It means that neither the client nor server actually knows what the state of the other is. No matter how many transmissions go back and forth, nothing about the previous transmission is remembered. Any continuity is a result of the message content being transmitted back and forth, not the memory of either party.
+
+19. What is curl?
+A command line tool for getting/sending files vis URL syntax. Stands for ... Client URL.
+
+20. Make a GET request to the icanhazdadjoke API with curl to find all jokes involving the word "pirate." (your answer should be the curl command required).
+curl "https://icanhazdadjoke.com/search?term=pirate"
+
+
