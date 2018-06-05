@@ -1,0 +1,38 @@
+body {
+  background-color: #000;
+  font-family: 'Chewy', cursive;
+}
+
+h1 {
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+#searchTerm,
+button {
+  padding: 1em;
+  margin: 0.2em;
+  width: 150px;
+  border-radius: 5%;
+  /* font-weight: bold; */
+  border: none;
+  font-size: 80%;
+}
+
+button {
+  display: inline-block;
+  color: white;
+}
+
+#submitBtn {
+  background-color: dimgray;
+}
+
+#removeBtn {
+  margin-left: 1em;
+  background-color: #ff5733;
+}
