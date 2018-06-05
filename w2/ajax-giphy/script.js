@@ -11,6 +11,7 @@ function addGif(evt) {
       console.log(gifSrc);
       let $newGif = $(`<img src="${gifSrc}">`);
       $('#gifHolder').append($newGif);
+      evt.target.reset();
     }
   );
 }

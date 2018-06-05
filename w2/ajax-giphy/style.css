@@ -36,3 +36,8 @@ button {
   margin-left: 1em;
   background-color: #ff5733;
 }
+
+#gifHolder {
+  /* display: flex; */
+  flex-wrap: wrap;
+}
