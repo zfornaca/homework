@@ -96,6 +96,10 @@ function handleClick(evt) {
     }, 100);
   }
 
+  if (checkForWin()) {
+    return endGame(`Player ${currPlayer} won!`);
+  }
+
   // check for tie
   if (
     board[0].every(function(val) {
