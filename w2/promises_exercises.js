@@ -38,3 +38,18 @@ var promise2 = $
 Promise.race([promise1, promise2])
   .then(result => console.log(result))
   .catch(err => console.log(err));
+
+// 4, alternate
+
+var luke = $.getJSON('https://swapi.co/api/people/1/');
+var vader = $.getJSON('https://swapi.co/api/people/4/');
+
+Promise.race([luke, vader])
+  .then(result => {
+    if (result.name === 'Luke Skywalker') {
+      console.log(`${result.name} has saved the galaxy`);
+    } else {
+      console.log(`The galaxy has fallen to ${result.name}`);
+    }
+  })
+  .catch(err => console.log(err));
