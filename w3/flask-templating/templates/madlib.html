@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block content %}
+
+<h4>Perhaps you too enjoy Mad Libs, the classic phrasal template word game where one player prompts others for a list of words
+  to substitute for blanks in a story, before reading the – often comical or nonsensical – story aloud. Perhaps this is your
+  lucky day!</h4>
+
+<form action="/story">
+  <p>A name:
+    <input type="text" name="name1">
+  </p>
+  <p>Another name:
+    <input type="text" name="name2">
+  </p>
+  <p>A noun:
+    <input type="text" name="noun1">
+  </p>
+  <p>Another noun, capitalized:
+    <input type="text" name="noun2">
+  </p>
+  <p>A plural noun:
+    <input type="text" name="plural_noun">
+  </p>
+  <p>An animal:
+    <input type="text" name="animal">
+  </p>
+  <p>A job:
+    <input type="text" name="job">
+  </p>
+  <p>A verb:
+    <input type="text" name="verb1">
+  </p>
+  <p>Another verb:
+    <input type="text" name="verb2">
+  </p>
+  <p>An adjective:
+    <input type="text" name="adj1">
+  </p>
+  <p>Another adjective:
+    <input type="text" name="adj2">
+  </p>
+  <p>Yet another adjective:
+    <input type="text" name="adj3">
+  </p>
+  <p>Hmm ... how about an adjective?:
+    <input type="text" name="adj4">
+  </p>
+  <p>Another:
+    <input type="text" name="adj5">
+  </p>
+  <p>I still thirst for adjectives:
+    <input type="text" name="adj6">
+  </p>
+
+
+
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+{% endblock %} # adj1 # adj2 # adj3 # adj4 # adj5 # adj6
