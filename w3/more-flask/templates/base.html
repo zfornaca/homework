@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flask exercise: sports teams</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Shrikhand" rel="stylesheet">  
+</head>
+<body>
+  <div class="frame-top">
+    <p id="mainHeader">Sportspedia</p>
+    <p class="tagline">The sports encyclopedia that anyone can edit</p>
+  </div>
+  <div class="frame-mid">
+
+    {% block content %}
+    {% endblock %}
+    
+  </div>
+  
+  <div class="frame-bottom">
+  <p class="tagline">Copyright 2018.</p>
+   
+  </div>
+</body>
+</html>

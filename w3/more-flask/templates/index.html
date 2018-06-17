@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>All the teams in the world</h2>
+<ul>
+{% for team in teams %}
+<li><a href="{{ url_for('show', id=team.id) }}">{{ team.city }} {{ team.name }}</a>
+
+</li>
+{% endfor %}
+
+</ul>
+<p>
+
+  <a href="{{ url_for('new') }}">Did we miss one? Add a new team here.</a>
+</p>
+
+{% endblock %}

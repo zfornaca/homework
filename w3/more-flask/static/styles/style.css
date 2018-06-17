@@ -1,0 +1,76 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 125%;
+}
+
+.frame-top {
+  border-bottom: 3px solid brown;
+  align-content: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+div p {
+  padding: 0;
+  margin: 0;
+}
+
+#mainHeader {
+  font-family: 'Shrikhand', cursive;
+  color: brown;
+  font-size: 8vw;
+}
+
+h2 {
+  font-family: 'Shrikhand', cursive;
+  color: brown;
+  font-size: 150%;
+}
+
+button {
+  color: white;
+  background-color: brown;
+  font-family: 'Shrikhand', cursive;
+  font-size: 100%;
+  padding: 0.5em 1em 0.5em 1em;
+  border-radius: 2em;
+  margin: 1em;
+}
+
+label {
+  display: inline-block;
+  width: 7em;
+}
+
+.tagline {
+  margin-bottom: 0.5em;
+}
+
+.frame-bottom {
+  border-top: 3px solid brown;
+  align-content: center;
+  width: 60%;
+  margin: 0 auto;
+  padding: 0.5em;
+}
+
+.frame-mid {
+  align-content: center;
+  width: 60%;
+  margin: 0 auto;
+  padding: 0.5em;
+}
+
+.frame-mid > p {
+  margin-bottom: 0.2em;
+}
+
+a:link,
+a:visited {
+  color: #c70039;
+}
+
+a:hover,
+a:active {
+  color: #ffc300;
+}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h2>All about the {{ team.city }} {{ team.name }}</h2>
+<ul>
+  <li>City: {{ team.city }}</li>
+  <li>Team name: {{ team.name }}</li>
+  <li>Sport: {{ team.sport }}</li>
+
+</ul>
+<p><a href="{{ url_for('index') }}">Return to the full list.</a></p>
+<p><a href="{{ url_for('edit', id=team.id) }}">Edit the {{ team.city }} {{ team.name }} profile.</a></p>
+<p><a href="{{ url_for('destroy', id=team.id) }}?_method=DELETE" method="POST">Delete the {{ team.city }} {{ team.name }}.</a></p>
+
+{% endblock %}

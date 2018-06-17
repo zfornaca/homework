@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update the profile for the {{ team.city }} {{ team.name }}</h2>
+
+<form action="{{ url_for('update', id=team.id) }}?_method=PATCH", method="POST">
+
+  
+  
+  <p>
+  <label for="city">City:</label>
+  <input id="city" name="city" type="text" placeholder="Enter a city" value="{{ team.city }}"/>
+</p>
+
+<p>
+<label for="nam">Team name:</label>
+<input id="name" name="name" type="text" placeholder="Enter a team name" value="{{ team.name }}"/>
+</p>
+
+<p>
+<label for="sport">Sport:</label>
+<input id="sport" name="sport" type="text" placeholder="Enter a sport" value="{{ team.sport }}"/>
+</p>
+
+<p>
+<button type="submit">Update</button>
+</p>
+
+</form>
+
+<a href="{{ url_for('show', id=team.id) }}">Return to the {{ team.city }} {{ team.name }} profile page.</a>
+
+{% endblock %}
