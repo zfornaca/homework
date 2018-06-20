@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Behold {{ user.first }} {{ user.last }}</h1>
+<p>
+  <a href="{{ url_for('users_index') }}">Return to the full list.</a>
+</p>
+<p>
+  <a href="{{ url_for('users_edit', user_id=user.id) }}">Edit {{ user.first }} {{ user.last }}'s' profile.</a>
+</p>
+<p>
+  <a href="{{ url_for('users_destroy', user_id=user.id) }}?_method=DELETE" method="POST">Remove {{ user.first}} {{ user.last }} (and their messages) from the database.</a>
+</p>
+
+{% endblock %}

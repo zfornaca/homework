@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Update {{ user.first }} {{ user.last }}'s information.</h1>
+
+<form action="{{ url_for('users_update', user_id=user.id) }}?_method=PATCH", method="POST">
+
+  
+  
+  <p>
+  <label for="first">New first name:</label>
+  <input id="first" name="first" type="text" placeholder="New first name" value="{{ user.first }}"/>
+</p>
+
+<p>
+<label for="last">New last name:</label>
+<input id="last" name="last" type="text" placeholder="New last name" value="{{ user.last }}"/>
+</p>
+
+<p>
+<button type="submit">Update</button>
+</p>
+
+</form>
+
+<a href="{{ url_for('users_show', user_id=user.id) }}">Return to {{ user.first }} {{ user.last }}'s profile page.</a>
+
+{% endblock %}

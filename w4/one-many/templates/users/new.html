@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Add a new user</h2>
+
+<form action="{{ url_for('users_create') }}" method="POST">
+  <p>
+
+  </p>
+  <label for="first">First name:</label>
+  <input id="first" name="first" type="text" placeholder="User's first name" />
+
+  <p>
+    <label for="last">Last name:</label>
+    <input id="last" name="last" type="text" placeholder="User's last name" />
+  </p>
+
+  <p>
+    <button type="submit">Create new user</button>
+  </p>
+
+</form>
+<p>
+
+  <a href="{{ url_for('users_index') }}">Return to the main list.</a>
+</p>
+
+{% endblock %}
