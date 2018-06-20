@@ -6,15 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>1:M exercise</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-  <!-- Fonts go here -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato" rel="stylesheet">
+
 </head>
 
 <body>
-  <h1>Above block content</h1>
-  <hr> {% block content %} {% endblock %}
-  <hr>
-  <h1>Below block content</h1>
+  <div id="content">
+    <div id="masthead">
+
+      <p id="siteTitle">Philosophy Dog.gg</p>
+      <p id="tagline">Who's a clever boy?</p>
+
+    </div>
+
+    <hr> {% block content %} {% endblock %}
+    <hr>
+    <p>Copyright 2018. 🐾</p>
+  </div>
 </body>
 
 </html>

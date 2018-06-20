@@ -1,13 +1,22 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Behold {{ user.first }} {{ user.last }}</h1>
+<h1>Behold {{ user.first_name }} {{ user.last_name }}</h1>
+<div id="flexbox">
+
+  <div id="imgbox">
+    <img src="{{ user.image_url}}" alt="">
+  </div>
+  <p class="wisdom"><a href="{{ url_for('msgs_index', user_id=user.id)}}">The wisdom of {{ user.first_name }} {{ user.last_name }}.</a></p>
+</div>
+  
 <p>
   <a href="{{ url_for('users_index') }}">Return to the full list.</a>
 </p>
 <p>
-  <a href="{{ url_for('users_edit', user_id=user.id) }}">Edit {{ user.first }} {{ user.last }}'s' profile.</a>
+  <a href="{{ url_for('users_edit', user_id=user.id) }}">Edit {{ user.first_name }} {{ user.last_name }}'s' profile.</a>
 </p>
 <p>
-  <a href="{{ url_for('users_destroy', user_id=user.id) }}?_method=DELETE" method="POST">Remove {{ user.first}} {{ user.last }} (and their messages) from the database.</a>
+  <a href="{{ url_for('users_destroy', user_id=user.id) }}?_method=DELETE" method="POST">Remove {{ user.first_name }} {{ user.last_name }} (and their messages) from the database.</a>
 </p>
+
 
 {% endblock %}

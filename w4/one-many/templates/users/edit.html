@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Update {{ user.first }} {{ user.last }}'s information.</h1>
+<h1>Update {{ user.first_name }} {{ user.last_name }}'s information.</h1>
 
 <form action="{{ url_for('users_update', user_id=user.id) }}?_method=PATCH", method="POST">
 
   
   
   <p>
-  <label for="first">New first name:</label>
-  <input id="first" name="first" type="text" placeholder="New first name" value="{{ user.first }}"/>
+  <label for="first_name">New first name:</label>
+  <input id="first_name" name="first_name" type="text" placeholder="New first name" value="{{ user.first_name }}"/>
 </p>
 
 <p>
-<label for="last">New last name:</label>
-<input id="last" name="last" type="text" placeholder="New last name" value="{{ user.last }}"/>
+<label for="last_name">New last name:</label>
+<input id="last_name" name="last_name" type="text" placeholder="New last name" value="{{ user.last_name }}"/>
 </p>
+
+<p>
+    <label for="image_url">Headshot:</label>
+    <input id="image_url" name="image_url" type="text" placeholder="Headshot" value="{{ user.image_url }}"/>
+  </p>
 
 <p>
 <button type="submit">Update</button>
@@ -23,6 +28,6 @@
 
 </form>
 
-<a href="{{ url_for('users_show', user_id=user.id) }}">Return to {{ user.first }} {{ user.last }}'s profile page.</a>
+<a href="{{ url_for('users_show', user_id=user.id) }}">Return to {{ user.first_name }} {{ user.last_name }}'s profile page.</a>
 
 {% endblock %}

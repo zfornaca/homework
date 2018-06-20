@@ -19,9 +19,9 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    first = db.Column(db.Text, nullable=False)
-    last = db.Column(db.Text, nullable=False)
-    # like 95% sure I have the backref correct; less sure on cascade
+    first_name = db.Column(db.Text, nullable=False)
+    last_name = db.Column(db.Text)
+    image_url = db.Column(db.Text)
     msgs = db.relationship('Message', backref="user", cascade="all,delete")
 
 
@@ -29,7 +29,7 @@ class Message(db.Model):
     __tablename__ = "msgs"
 
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text, nullable=False)
+    content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
@@ -58,10 +58,12 @@ def users_new():
 @app.route("/users", methods=["POST"])
 def users_create():
     """Create a new user and return to the list of all users."""
-    first = request.form['first']
-    last = request.form['last']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    image_url = request.form['image_url']
     # add user_img attribute here
-    new_user = User(first=first, last=last)
+    new_user = User(
+        first_name=first_name, last_name=last_name, image_url=image_url)
     db.session.add(new_user)
     db.session.commit()
     return redirect(url_for("users_index"))
@@ -95,11 +97,11 @@ def users_edit(user_id):
 def users_update(user_id):
     """Update seledted user's data and return to that user's info page."""
     user = User.query.get(user_id)
-    user.first = request.form['first']
-    user.last = request.form['last']
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
     db.session.add(user)
     db.session.commit()
-    return redirect(url_for("users_show", id=user.id))
+    return redirect(url_for("users_show", user_id=user.id))
 
 
 ######################
@@ -121,22 +123,50 @@ def msgs_new(user_id):
     return render_template('msgs/new.html', user=user)
 
 
-@app.route("/users/<int:user_id>/msgs", mnethods=["POST"])
+@app.route("/users/<int:user_id>/msgs", methods=["POST"])
 def msgs_create(user_id):
     """Create a new message for selected user and return to that user's message index."""
-    body = request.form['body']
-    new_message = Message(body=body, user_id=user_id)
+    content = request.form['content']
+    new_message = Message(content=content, user_id=user_id)
     db.session.add(new_message)
     db.session.commit()
     return redirect(url_for('msgs_index', user_id=user_id))
 
 
-# pick up at row 128
+@app.route("/msgs/<int:msg_id>")
+def msgs_show(msg_id):
+    """Display a spefic message for the selected user."""
+    msg = Message.query.get_or_404(msg_id)
+    return render_template('msgs/show.html', msg=msg)
 
-# msgs show
-# msgs destroy
-# msgs edit
-# msgs update
+
+@app.route("/msgs/<int:msg_id>", methods=["DELETE"])
+def msgs_destroy(msg_id):
+    """Delete selected message and return to list of messages."""
+    msg = Message.query.get_or_404(msg_id)
+    user = msg.user
+    db.session.delete(msg)
+    db.session.commit()
+    return redirect(url_for('msg_index', user_id=user.id))
+
+
+@app.route("/msgs/<int:msg_id>/edit")
+def msgs_edit(msg_id):
+    """Display form to edit selected message."""
+    msg = Message.query.get_or_404(msg_id)
+    return render_template('msgs/edit.html', msg=msg)
+
+
+@app.route("/msgs/<int:msg_id>", methods=["PATCH"])
+def msgs_update(msg_id):
+    """Update selected message and redirect to lsit of messages."""
+    msg = Message.query.get_or_404(msg_id)
+    msg.content = request.form['content']
+    user = msg.user
+    db.session.add(msg)
+    db.session.commit()
+    return redirect(url_for('msg_index', user_id=user.id))
+
 
 # how do I set up link from user page to their messages?
 # more broadly, need to create 4 new HTML files

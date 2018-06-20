@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Compose a new message</h1>
+
+<form action="{{url_for('msgs_index', user_id=user.id)}}" method="POST">
+
+  <label for="content">Message: </label>
+  <input type="text" id="content" name="content">
+
+  <button type="submit">Create your message</button>
+
+</form>
+
+<a href="{{ url_for('msgs_index', user_id=user.id) }}">Return to your list of messages.</a>
+
+{% endblock %}

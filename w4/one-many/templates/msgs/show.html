@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ msg.user.first_name }}'s message:</h1>
+
+<p>{{ msg.content }}</p>
+
+<a href="{{ url_for('msgs_edit', msg_id=msg.id) }}">Edit message.</a>
+<a href="{{ url_for('msgs_destroy', msg_id=msg.id) }}">Delete message.</a>
+<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">Return to list of messages.</a>
+
+{% endblock %}
