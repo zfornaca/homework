@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<ul>Messages from {{ user.first_name }} {{user.last_name }} 
+<h1>The wisdom of {{ user.first_name }} {{ user.last_name }}</h1>
   
+
   {% for msg in user.msgs %}
-  <li>
+  <p class="pearl">
     <a href="{{url_for('msgs_show', msg_id=msg.id)}}">
-      {{ msg.content }}
+      "{{ msg.content }}"
     </a>
 
-  </li>
-{% endfor %}
-</ul>
+  </p>
+
+  {% endfor %}
 
 <p>
-  <a href="{{url_for('msgs_new', user_id=user.id)}}">Add a message.</a>
-</p>
-<p>
+  <a href="{{url_for('msgs_new', user_id=user.id)}}">Add a quote from {{ user.first_name }} {{ user.last_name }}</a> 🐾 
 <a href="{{url_for('users_show', user_id=user.id)}}">
-  Return to {{ user.first_name }}'s profile.
+  Return to {{ user.first_name }} {{ user.last_name }}'s profile
 </a>
 
 </p>

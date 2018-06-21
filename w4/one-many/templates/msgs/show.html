@@ -2,10 +2,15 @@
 
 <h1>{{ msg.user.first_name }}'s message:</h1>
 
-<p>{{ msg.content }}</p>
+<div id="flexquote">
+  <div class="inline"><p>"{{ msg.content }}"</p><p><em>—{{msg.user.first_name}} {{msg.user.last_name}}</em></p></div>
+  <div id="quoteimg" class="inline">
+    <img src="{{ msg.user.image_url}}" alt="">
+  </div>
+</div>
 
-<a href="{{ url_for('msgs_edit', msg_id=msg.id) }}">Edit message.</a>
-<a href="{{ url_for('msgs_destroy', msg_id=msg.id) }}">Delete message.</a>
-<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">Return to list of messages.</a>
+<a href="{{ url_for('msgs_edit', msg_id=msg.id) }}">Edit quote</a> 🐾 
+<a href="{{ url_for('msgs_destroy', msg_id=msg.id) }}?_method=DELETE" method="POST">Delete quote</a> 🐾 
+<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">See all quotes from {{ msg.user.first_name }} {{msg.user.last_name }}</a>
 
 {% endblock %}

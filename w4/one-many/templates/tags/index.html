@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %} {% for tag in tags %}
+<p class="thinker">
+
+  <a href="{{ url_for('tags_show', tag_id=tag.id) }}">{{ tag.tagname }}</a>
+</p>
+
+{% endfor %}
+
+
+<p>
+
+  <a href="{{ url_for('tags_new') }}">Add a new tag.</a>
+</p>
+
+
+
+
+{% endblock %}

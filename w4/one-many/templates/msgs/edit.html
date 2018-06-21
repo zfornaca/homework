@@ -1,16 +1,28 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Revise message.</h1>
+<h1>{{ msg.user.first_name }} {{ msg.user.last_name }} corrects the record:</h1>
 
 <form action="{{url_for('msgs_show', msg_id=msg.id)}}?_method=PATCH" method="POST">
+  <p>
 
-  <label for="content">Message: </label>
-  <input type="text" id="content" name="content" value="{{ msg.content }}">
+    <textarea name="content" id="content" rows="10" cols="40" placeholder="Write something here">{{ msg.content }}</textarea>
+  </p>
 
-  <button type="submit">Update your message</button>
+  {% for tag in tags %}
+  
+  <input type="checkbox" value="{{ tag.id }}" id="tag_{{ tag.id }}" name="tags" 
+  {% if tag in msg.tags %} 
+  checked 
+  {% endif %}>
+  
+  <label for="tag_{{ tag.id }}">{{ tag.tagname }}</label>
+
+  {% endfor %}
+
+  <button type="submit">So speaks {{ msg.user.first_name }} {{ msg.user.last_name }}</button>
 
 </form>
 
-<a href="{{ url_for('msgs_index', user_id=user.id) }}">Return to your list of messages.</a>
+<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">Return to your list of messages.</a>
 
 {% endblock %}

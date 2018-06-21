@@ -1,16 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Compose a new message</h1>
+<h1>{{ user.first_name }} {{ user.last_name }} speaks:</h1>
 
 <form action="{{url_for('msgs_index', user_id=user.id)}}" method="POST">
+<p>
+  
+  <textarea name="content" id="content" rows="10" cols="40" placeholder="Write something here"></textarea>
+</p>
 
-  <label for="content">Message: </label>
-  <input type="text" id="content" name="content">
 
-  <button type="submit">Create your message</button>
+{% for tag in tags %}
+
+<input type="checkbox" value="{{ tag.id }}" id="tag_{{ tag.id }}" name="tags">
+<label for="tag_{{ tag.id }}">{{ tag.tagname }}</label>
+
+{% endfor %}
+
+
+
+  <button type="submit">So speaks {{ user.first_name }} {{ user.last_name }}</button>
+
+
+
 
 </form>
-
-<a href="{{ url_for('msgs_index', user_id=user.id) }}">Return to your list of messages.</a>
+<hr>
+<a href="{{ url_for('msgs_index', user_id=user.id) }}">See all wisdom of {{ user.first_name }} {{ user.last_name }}</a>
 
 {% endblock %}

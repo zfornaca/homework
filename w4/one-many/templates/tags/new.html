@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Add a new tag</h1>
+
+<form action="{{ url_for('tags_create') }}" method="POST">
+  <p>
+
+    <label for="tagname">Tag name:</label>
+    <input id="tagname" name="tagname" type="text" placeholder="Name of tag" />
+  </p>  
+
+<p>Apply to existing quotes?</p>
+
+{% for msg in msgs %}
+<p>
+  <input type="checkbox" value="{{ msg.id }}" id="msg_{{ msg.id }}" name="msgs">
+  <label for="msg_{{ msg.id }}">
+    "{{ msg.content }}" <em>- {{ msg.user.first_name }} {{ msg.user.last_name }}</em>
+  </label>
+</p>
+{% endfor %}
+
+  <p>
+    <button type="submit">Create new tag</button>
+  </p>
+
+</form>
+<p>
+
+  <a href="{{ url_for('tags_index') }}">Return to the list of all tags.</a>
+</p>
+
+{% endblock %}

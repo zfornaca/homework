@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Update the {{ tag.tagname }} tag.</h1>
+
+<form action="{{ url_for('tags_show', tag_id=tag.id) }}?_method=PATCH" , method="POST">
+
+  <p>
+    <label for="tagname">Tag name:</label>
+    <input id="tagname" name="tagname" type="text" placeholder="Name of tag" value="{{ tag.tagname }}" />
+  </p>
+
+  <p>Adjust tagging across quotes?</p>
+
+  {% for msg in msgs %}
+  <p>
+    <input type="checkbox" value="{{ msg.id }}" id="msg_{{ msg.id }}" name="msgs" {% if msg in tag.msgs %} checked {% endif %}>
+    <label for="msg_{{ msg.id }}">
+      "{{ msg.content }}"
+      <em>- {{ msg.user.first_name }} {{ msg.user.last_name }}</em>
+    </label>
+  </p>
+  {% endfor %} 
+
+
+
+
+
+
+
+  <p>
+    <button type="submit">Update</button>
+  </p>
+
+</form>
+
+<a href="{{ url_for('tags_show', tag_id=tag.id) }}">Return to the {{ tag.tagname }} tag page.</a>
+
+{% endblock %}

@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<h2>Add a new user</h2>
+<h1>Add a new user</h1>
 
 <form action="{{ url_for('users_create') }}" method="POST">
   <p>
 
+    <label for="first_name">First name:</label>
+    <input id="first_name" name="first_name" type="text" placeholder="User's first name" />
   </p>
-  <label for="first_name">First name:</label>
-  <input id="first_name" name="first_name" type="text" placeholder="User's first name" />
 
   <p>
     <label for="last_name">Last name:</label>

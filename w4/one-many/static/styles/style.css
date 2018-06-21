@@ -73,3 +73,28 @@ img {
   font-size: 1.5em;
   width: 400px;
 }
+
+#content textarea {
+  margin: 0 auto;
+  text-align: left;
+}
+
+.pearl {
+  font-size: 1.15em;
+}
+
+.inline {
+  display: inline-block;
+}
+
+#quoteimg {
+  width: 200px;
+  padding-left: 1em;
+  margin-bottom: 3em;
+}
+
+#flexquote {
+  display: flex;
+  text-align: right;
+  justify-content: center;
+}
