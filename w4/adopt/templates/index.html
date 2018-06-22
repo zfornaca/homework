@@ -1,54 +1,73 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<!-- "Available for adoption" -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <h1>Available for adoption</h1>
+    </div>
+  </div>
+</div>
 
-<h1>Pets</h1>
-<h1>Available</h1>
-{% for pet in pets %}
+<!-- Adoptable kitty cards -->
+<div class="container">
+  <div class="row">
+    {% for pet in pets %} {% if pet.available %}
+    <div class="card mb-3 col-12 col-sm-6 col-md-4 col-xl-3">
+      <h3 class="card-header"><a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">{{ pet.name }}</a></h3>
+      {% if pet.photo_url %}
+      <img class="img-responsive image-resize" src="{{ pet.photo_url }}">
+      {% else %}
+      <img class="img-responsive image-resize" src="https://openclipart.org/download/283092/polite.svg">
+      {% endif %}
+      <div class="card-body">
+        I'm available to adopt!
+        <a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">Get to know me!</a>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
 
+  </div>
+</div>
 
-{% if pet.available %}
-<p>
-  <a href="{{ url_for('show', pet_id=pet.id) }}">
-  {{ pet.name }}
-</a>
-  <img src="{{ pet.photo_url }}" alt="">
-    
-  Available
-  {% endif %}
-  
-</p>
-{% endfor %}
+<!-- "Unavailable" -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <h1>Unavailable, and bound for a loving home</h1>
+    </div>
+  </div>
+</div>
 
+<!-- Unavailable kitty cards -->
+<div class="container">
+  <div class="row">
+    {% for pet in pets %} {% if not pet.available %}
+    <div class="card mb-3 col-12 col-sm-6 col-md-4 col-xl-3">
+      <h3 class="card-header"><a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">{{ pet.name }}</a></h3>
+      {% if pet.photo_url %}
+      <img class="img-responsive image-resize" src="{{ pet.photo_url }}">
+      {% else %}
+      <img class="img-responsive image-resize" src="https://openclipart.org/download/283092/polite.svg">
+      {% endif %}
+      <div class="card-body">
+        I'm already bound for a new home, but
+        <a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">check me out!</a>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
 
+  </div>
+</div>
 
-<h1>Unavailable</h1>
-{% for pet in pets %}
+<hr>
 
-
-{% if not pet.available %}
-<p>
-  <a href="{{ url_for('show', pet_id=pet.id) }}">
-  {{ pet.name }}
-</a>
-  <img src="{{ pet.photo_url }}" alt="">
-    
-  {% endif %}
-  
-</p>
-{% endfor %}
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="{{ url_for('pets_add') }}">Add a new pet</a>
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <a href="{{ url_for('pets_add') }}"><h3>Add a new pet</h3></a>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

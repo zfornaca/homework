@@ -1,3 +1,7 @@
+# How to get textarea (for notes), small note under species ("please not we only accept cats, etc.")
+# (intersection of Bootstrap and WTForms)
+# I guess my placeholder image should depend on the species, huh?
+
 from flask import Flask, request, url_for, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
@@ -42,6 +46,7 @@ class AddPetForm(FlaskForm):
                 message='Must be one of %(values)s')
         ])
     photo = StringField("Photo URL", validators=[Optional(), URL()])
+    # photo_url = StringField("Photo URL", validators=[Optional(), URL()])
     age = IntegerField(
         "Age", validators=[Optional(), NumberRange(min=0, max=30)])
     notes = StringField("Notes")
@@ -50,7 +55,8 @@ class AddPetForm(FlaskForm):
 class EditPetForm(FlaskForm):
     """Form for editing pet details."""
 
-    photo = StringField("Photo URL", validators=[Optional(), URL()])
+    # photo = StringField("Photo URL", validators=[Optional(), URL()])
+    photo_url = StringField("Photo URL", validators=[Optional(), URL()])
     notes = StringField("Notes")
     available = BooleanField("Available")
 
@@ -98,7 +104,7 @@ def show(pet_id):
     form = EditPetForm(obj=pet)
 
     if form.validate_on_submit():
-        pet.photo_url = form.data['photo']
+        pet.photo_url = form.data['photo_url']
         pet.notes = form.data['notes']
         pet.available = form.data['available']
         db.session.commit()

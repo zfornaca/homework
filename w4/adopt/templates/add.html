@@ -1,26 +1,105 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h1>Add a pet</h1>
+      </div>
+    </div>
+  </div>
 
-<h1>Add a pet</h1>
-
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
 <form action="{{ url_for('pets_add') }}" method="POST">
 
-  {{ form.hidden_tag() }}
+  {{ form.hidden_tag() }} 
   
   {% for field in form if field.widget.input_type != 'hidden' %}
-    <p>
+  <div class='form-group'>
       {{ field.label }}
-      {{ field }}
-  
-      {% for error in field.errors %}
-        {{ error }}
-      {% endfor %}
-    </p>
+      {{ field(class="form-control") }}
+      <span>
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <b class="text-danger">{{ error }}</b>
+          {% endfor %}
+        {% endif %}
+      </span>
+    </div>
   {% endfor %}
-  
-  <button type="submit">Submit</button>
-  
-  </form>
+  <button class="btn btn-primary" type="submit">Add</button>
+
+</form>
+</div></div></div> 
+
+<hr>
+<div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <a href="/"><h3>Return to main page</h3></a>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
+
+
+
+
+
+
+
+<!-- 
+<form>
+    <fieldset>
+      <legend>Legend</legend>
+      <!-- Pet name -->
+      <div class="form-group">
+        <label for="name">Pet name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name">
+      </div>
+      <!-- Species -->
+      <div class="form-group">
+        <label for="species">Species</label>
+        <input type="text" class="form-control" id="species" placeholder="Enter species">
+        <small id="emailHelp" class="form-text text-muted">We love all animals, but our shelter currently only accommodates cats, dogs, and porcupines.</small>
+      </div>
+      <!-- Photo URL -->
+      <div class="form-group">
+        <label for="photo_url">Pet name</label>
+        <input type="text" class="form-control" id="photo_url" placeholder="Enter URL for photo">
+      </div>
+      <!-- Age -->
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter age">
+      </div>
+      <!-- Notes -->
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea class="form-control" id="notes" rows="3"></textarea>
+      </div>
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary">Add</button>
+    </fieldset>
+  </form>
+
+
+
+
+
+<div class="form-group">
+  <label for="exampleInputFile">File input</label>
+  <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+  <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+</div>
+
+<fieldset class="form-group">
+  <legend>Checkboxes</legend>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="" checked=""> Option one is this and that—be sure to include why it's great
+    </label>
+  </div>
+</fieldset> -->
