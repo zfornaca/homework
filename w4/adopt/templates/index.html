@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Pets</h1>
+<h1>Available</h1>
+{% for pet in pets %}
+
+
+{% if pet.available %}
+<p>
+  <a href="{{ url_for('show', pet_id=pet.id) }}">
+  {{ pet.name }}
+</a>
+  <img src="{{ pet.photo_url }}" alt="">
+    
+  Available
+  {% endif %}
+  
+</p>
+{% endfor %}
+
+
+
+<h1>Unavailable</h1>
+{% for pet in pets %}
+
+
+{% if not pet.available %}
+<p>
+  <a href="{{ url_for('show', pet_id=pet.id) }}">
+  {{ pet.name }}
+</a>
+  <img src="{{ pet.photo_url }}" alt="">
+    
+  {% endif %}
+  
+</p>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="{{ url_for('pets_add') }}">Add a new pet</a>
+
+{% endblock %}
