@@ -1,19 +1,24 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>Great thinkers</h1>
 
-  {% for user in users %}
+{% for user in users %}
 <p class="thinker">
-  
+
   <a href="{{ url_for('users_show', user_id=user.id) }}">{{ user.first_name }} {{ user.last_name }}</a>
 </p>
 
-  {% endfor %}
+{% endfor %}
 
+
+<!-- if not logged in -->
+
+{% if not session['user_id'] %}
 
 <p>
-
-  <a href="{{ url_for('users_new') }}">Add a new philosopher</a>
+  <a href="{{ url_for('login') }}">Log in</a> 🐾 
+  <a href="{{ url_for('register') }}">Create an account</a>
 </p>
+
+{% endif %}
 
 {% endblock %}

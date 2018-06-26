@@ -1,10 +1,8 @@
-# Re: #7 ("Can you think of a way to improve the performance") the answer is no.
-# need to make tags visible on messages page (e.g. Socrates/kindling should have 'scrappy')
-
-from flask import Flask, request, url_for, redirect, render_template, flash
+from flask import Flask, request, url_for, redirect, render_template, flash, session
 from flask_modus import Modus
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/one_many"
@@ -14,6 +12,7 @@ app.config['SECRET_KEY'] = "infinitesadness"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 modus = Modus(app)
+bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 
 # toolbar = DebugToolbarExtension(app)
@@ -26,8 +25,33 @@ class User(db.Model):
     first_name = db.Column(db.Text, nullable=False)
     last_name = db.Column(db.Text)
     image_url = db.Column(db.Text)
+    username = db.Column(db.Text, nullable=False)
+    password = db.Column(db.Text, nullable=False)
     msgs = db.relationship('Message', backref="user", cascade="all,delete")
-    # I think this is still okay; Matt's msgs line is a little different
+
+    @classmethod
+    def register(cls, username, password, first_name, last_name, image_url):
+        """Register a user, hashing their password."""
+
+        hashed = bcrypt.generate_password_hash(password)
+        hashed_utf8 = hashed.decode("utf8")
+        return cls(
+            username=username,
+            password=hashed_utf8,
+            first_name=first_name,
+            last_name=last_name,
+            image_url=image_url)
+
+    @classmethod
+    def authenticate(cls, username, password):
+        """Validate that the user exists & that their password is correct."""
+
+        user = User.query.filter_by(username=username).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, password):
+                return user
+
+        return False
 
 
 class Message(db.Model):
@@ -79,25 +103,47 @@ def users_index():
     return render_template("users/index.html", users=users)
 
 
-@app.route("/users/new")
-def users_new():
-    """Display form to create a new user."""
-    return render_template("users/new.html")
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    """Provides/handles form to register a new user and, if successful, redirects to a login page."""
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        image_url = request.form.get("image_url")
+        user = User.register(username, password, first_name, last_name,
+                             image_url)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("login"))
+
+    return render_template("users/register.html")
 
 
-@app.route("/users", methods=["POST"])
-def users_create():
-    """Create a new user and return to the list of all users."""
-    if request.form['first_name'] == "":
-        flash("A first name is required.")
-        return redirect(url_for("users_new"))
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    image_url = request.form['image_url']
-    new_user = User(
-        first_name=first_name, last_name=last_name, image_url=image_url)
-    db.session.add(new_user)
-    db.session.commit()
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    """Provides/handles form to login an existing user and, if successful, redirects to MYSTERY ZONE."""
+
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        user = User.authenticate(username, password)
+        if user:
+            session['user_id'] = user.id
+            return redirect(url_for("users_index"))
+
+    return render_template("users/login.html")
+
+
+@app.route("/logout")
+def logout():
+    """Logs out user and redirects to main index."""
+
+    if session['user_id']:
+        del session['user_id']
+
     return redirect(url_for("users_index"))
 
 
@@ -112,16 +158,23 @@ def users_show(user_id):
 def users_destroy(user_id):
     """Remove user (and all their messages) from the database."""
     user = User.query.get_or_404(user_id)
-    db.session.delete(user)
-    db.session.commit()
-    return redirect(url_for("users_index"))
+
+    if user.id == session['user_id']:
+        db.session.delete(user)
+        db.session.commit()
+        return redirect(url_for("users_index"))
+
+    return redirect(url_for("users_show", user_id=user.id))
 
 
 @app.route("/users/<int:user_id>/edit")
 def users_edit(user_id):
     """Display form to edit selected user."""
     user = User.query.get_or_404(user_id)
-    return render_template("users/edit.html", user=user)
+    if user.id == session['user_id']:
+        return render_template("users/edit.html", user=user)
+
+    return redirect(url_for("users_show", user_id=user.id))
 
 
 @app.route("/users/<int:user_id>", methods=["PATCH"])
@@ -152,8 +205,12 @@ def msgs_index(user_id):
 def msgs_new(user_id):
     """Display form to create a new message for selected user."""
     user = User.query.get_or_404(user_id)
-    tags = Tag.query.all()
-    return render_template('msgs/new.html', user=user, tags=tags)
+
+    if user.id == session['user_id']:
+        tags = Tag.query.all()
+        return render_template('msgs/new.html', user=user, tags=tags)
+
+    return redirect(url_for("users_show", user_id=user.id))
 
 
 @app.route("/users/<int:user_id>/msgs", methods=["POST"])
@@ -180,17 +237,24 @@ def msgs_destroy(msg_id):
     """Delete selected message and return to list of messages."""
     msg = Message.query.get_or_404(msg_id)
     user = msg.user
-    db.session.delete(msg)
-    db.session.commit()
-    return redirect(url_for('msgs_index', user_id=user.id))
+    if user.id == session['user_id']:
+        db.session.delete(msg)
+        db.session.commit()
+        return redirect(url_for('msgs_index', user_id=user.id))
+
+    return redirect(url_for("/msgs_show", msg_id=msg.id))
 
 
 @app.route("/msgs/<int:msg_id>/edit")
 def msgs_edit(msg_id):
     """Display form to edit selected message."""
     msg = Message.query.get_or_404(msg_id)
-    tags = Tag.query.all()
-    return render_template('msgs/edit.html', msg=msg, tags=tags)
+
+    if msg.user.id == session['user_id']:
+        tags = Tag.query.all()
+        return render_template('msgs/edit.html', msg=msg, tags=tags)
+
+    return redirect(url_for("/msgs_show", msg_id=msg.id))
 
 
 @app.route("/msgs/<int:msg_id>", methods=["PATCH"])

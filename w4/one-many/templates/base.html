@@ -27,6 +27,15 @@
     <hr>
     <a href="{{ url_for('users_index') }}">Browse all philosophers</a> 🐾
     <a href="{{ url_for('tags_index') }}">Browse all tags</a>
+
+    {% if session['user_id'] %}
+
+    <p>
+    <a href="{{ url_for('logout') }}">Log out</a>
+    </p>
+    {% endif %}
+    
+
     <p>Copyright 2018.</p>
   </div>
 </body>

@@ -109,3 +109,7 @@ img {
   padding: 0 10em 0 11em;
   text-align: left;
 }
+
+input {
+  width: 20em;
+}

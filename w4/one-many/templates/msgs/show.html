@@ -9,8 +9,13 @@
   </div>
 </div>
 
+{% if msg.user.id == session['user_id'] %}
+
 <a href="{{ url_for('msgs_edit', msg_id=msg.id) }}">Edit quote</a> 🐾 
 <a href="{{ url_for('msgs_destroy', msg_id=msg.id) }}?_method=DELETE" method="POST">Delete quote</a> 🐾 
+
+{% endif %}
+
 <a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">See all quotes from {{ msg.user.first_name }} {{msg.user.last_name }}</a>
 
 {% endblock %}

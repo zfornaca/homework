@@ -8,10 +8,11 @@
   <p class="wisdom"><a href="{{ url_for('msgs_index', user_id=user.id)}}">The wisdom of {{ user.first_name }} {{ user.last_name }}</a></p>
 </div>
   
+{% if user.id == session['user_id'] %}
 <p>
   <a href="{{ url_for('users_edit', user_id=user.id) }}">Edit this profile</a> 🐾 
   <a href="{{ url_for('users_destroy', user_id=user.id) }}?_method=DELETE" method="POST">Remove this profile.</a>
 </p>
-
+{% endif %}
 
 {% endblock %}

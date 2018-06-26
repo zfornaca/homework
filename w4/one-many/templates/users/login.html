@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %} {% for flash in get_flashed_messages() %}
+<div>
+  <h5>{{ flash }}</h5>
+</div>
+{% endfor %}
+
+<h1>Log in</h1>
+
+<form action="{{ url_for('login') }}" method="POST">
+  <p>
+
+    <label for="username">Username:</label>
+    <input id="username" name="username" type="text" placeholder="Choose a username" />
+  </p>
+
+  <p>
+
+    <label for="password">Password:</label>
+    <input id="password" name="password" type="password" placeholder="Choose a password" />
+  </p>
+
+
+  <p>
+    <button type="submit">Login</button>
+  </p>
+
+</form>
+<p>
+
+</p>
+
+{% endblock %}
