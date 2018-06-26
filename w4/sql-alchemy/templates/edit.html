@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Let's change our understanding of {{ cheese.name }}.</h2>
+
+<form action="{{ url_for('update', id=cheese.id) }}?_method=PATCH" , method="POST">
+  <p>
+
+    <label for="name">Cheese:</label>
+    <input id="name" name="name" type="text" placeholder="Name of cheese" value="{{ cheese.name }}" />
+  </p>
+
+  <p>
+    <label for="origin">Origin:</label>
+    <input id="origin" name="origin" type="text" placeholder="Country of origin" value="{{ cheese.origin }}" />
+  </p>
+
+  <p>
+    <label for="rating">Rating (from 1-5):</label>
+    <input id="rating" name="rating" type="text" placeholder="Deliciousness as a number" value="{{ cheese.rating }}" />
+  </p>
+
+  <p>
+    <button type="submit">Update that cheese</button>
+  </p>
+
+
+</form>
+
+<a href="{{ url_for('show', id=cheese.id) }}">Return to the {{ cheese.name }} profile page.</a>
+
+{% endblock %}

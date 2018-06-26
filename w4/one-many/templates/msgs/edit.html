@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>{{ msg.user.first_name }} {{ msg.user.last_name }} corrects the record:</h1>
+<h1>{{ msg.user.first_name }} {{ msg.user.last_name }} corrects the record</h1>
 
 <form action="{{url_for('msgs_show', msg_id=msg.id)}}?_method=PATCH" method="POST">
   <p>
@@ -14,15 +14,17 @@
   {% if tag in msg.tags %} 
   checked 
   {% endif %}>
-  
+
   <label for="tag_{{ tag.id }}">{{ tag.tagname }}</label>
 
   {% endfor %}
-
+<p>
+  
   <button type="submit">So speaks {{ msg.user.first_name }} {{ msg.user.last_name }}</button>
+</p>
 
 </form>
 
-<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">Return to your list of messages.</a>
+<a href="{{ url_for('msgs_index', user_id=msg.user.id) }}">See all wisdom of {{ msg.user.first_name }} {{ msg.user.last_name }}</a>
 
 {% endblock %}

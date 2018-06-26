@@ -17,8 +17,21 @@
       <h3 class="card-header"><a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">{{ pet.name }}</a></h3>
       {% if pet.photo_url %}
       <img class="img-responsive image-resize" src="{{ pet.photo_url }}">
-      {% else %}
+      <!-- if pet.species == 'cat' -->
+      {% elif pet.species == 'cat' %}
       <img class="img-responsive image-resize" src="https://openclipart.org/download/283092/polite.svg">
+      
+      {% elif pet.species == 'dog' %}
+      <!-- if pet.species == 'dog' -->
+      <img class="img-responsive image-resize" src="http://getdrawings.com/images/cute-dog-face-drawing-29.jpg">
+      
+      
+      
+      {% elif pet.species == 'porcupine' %}
+      <!-- if pet.species == 'porcupine' -->
+      <img class="img-responsive image-resize" src="https://i.pinimg.com/originals/09/0f/cf/090fcf9c294bda645936bbbfb455ea75.jpg">
+      
+      
       {% endif %}
       <div class="card-body">
         I'm available to adopt!
@@ -47,8 +60,21 @@
       <h3 class="card-header"><a href="{{ url_for('show', pet_id=pet.id) }}" class="card-link">{{ pet.name }}</a></h3>
       {% if pet.photo_url %}
       <img class="img-responsive image-resize" src="{{ pet.photo_url }}">
-      {% else %}
+      <!-- if pet.species == 'cat' -->
+      {% elif pet.species == 'cat' %}
       <img class="img-responsive image-resize" src="https://openclipart.org/download/283092/polite.svg">
+      
+      {% elif pet.species == 'dog' %}
+      <!-- if pet.species == 'dog' -->
+      <img class="img-responsive image-resize" src="http://getdrawings.com/images/cute-dog-face-drawing-29.jpg">
+      
+      
+      
+      {% elif pet.species == 'porcupine' %}
+      <!-- if pet.species == 'porcupine' -->
+      <img class="img-responsive image-resize" src="https://i.pinimg.com/originals/09/0f/cf/090fcf9c294bda645936bbbfb455ea75.jpg">
+      
+      
       {% endif %}
       <div class="card-body">
         I'm already bound for a new home, but
@@ -59,6 +85,30 @@
 
   </div>
 </div>
+
+<!-- "Petfinder" -->
+<div class="container">
+    <div class="row">
+      <div class="col-12 mt-3">
+        <h1>Here's a cutie from Petfinder</h1>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="container">
+      <div class="row">
+        <div class="card mb-3 col-12 col-sm-6 col-md-4 col-xl-3">
+          <h3 class="card-header">{{ pf_name }}</a></h3>
+          <img class="img-responsive image-resize" src="{{ pf_photo }}">
+          <div class="card-body">
+            Want more information? <a href="mailto:{{ pf_email }}" class="card-link">Email my shelter!</a>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
 
 <hr>
 

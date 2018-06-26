@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Request a cheese</h2>
+
+<form action="{{ url_for('create') }}" method="POST">
+  <p>
+
+    <label for="name">Cheese:</label>
+    <input id="name" name="name" type="text" placeholder="Name of cheese" />
+  </p>
+
+  <p>
+    <label for="origin">Origin:</label>
+    <input id="origin" name="origin" type="text" placeholder="Country of origin" />
+  </p>
+
+  <p>
+    <label for="rating">Rating (from 1-5):</label>
+    <input id="rating" name="rating" type="text" placeholder="Deliciousness as a number" />
+  </p>
+
+  <p>
+    <button type="submit">Request that cheese</button>
+  </p>
+
+</form>
+<p>
+
+  <a href="{{ url_for('index') }}">Return to the main list.</a>
+</p>
+
+{% endblock %}

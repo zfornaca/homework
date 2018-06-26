@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+<h1>Suggested snacks</h1>
+
+<!-- this url is /snacks/new -->
+<a href="{{ url_for('add_snack') }}">Suggest a new snack!</a>
+
+<ul>
+
+{% for snack in snacks %}
+<li><a href="{{ url_for('list_snacks') }}/{{ snack.id }}">{{ snack.name }}</a> ({{ snack.kind }}) ({{ snack.id }})</li>
+{% endfor %}
+</ul>
+  {% endblock %}
+
+  

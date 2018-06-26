@@ -1,6 +1,10 @@
-p,
+/* p,
 h1,
 li {
+  color: #263d42;
+  font-family: 'Lato', sans-serif;
+} */
+body {
   color: #263d42;
   font-family: 'Lato', sans-serif;
 }
@@ -12,9 +16,7 @@ li {
 }
 
 #masthead {
-  /* background-color: #8e6c88; */
   padding: 1vw;
-  /* text-align: center; */
 }
 
 #siteTitle,
@@ -22,6 +24,10 @@ li {
   color: #8e6c88;
   padding: 0;
   margin: 0;
+}
+
+a:link {
+  text-decoration: none;
 }
 
 #siteTitle {
@@ -97,4 +103,9 @@ img {
   display: flex;
   text-align: right;
   justify-content: center;
+}
+
+.lefty {
+  padding: 0 10em 0 11em;
+  text-align: left;
 }

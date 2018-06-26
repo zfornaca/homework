@@ -13,16 +13,21 @@
 
 <body>
   <div id="content">
-    <div id="masthead">
+    <a href="{{ url_for('users_index') }}">
 
-      <p id="siteTitle">Philosophy Dog.gg</p>
-      <p id="tagline">Who's a clever boy?</p>
-
-    </div>
+      <div id="masthead">
+        
+        <p id="siteTitle">Philosophy Dog.gg</p>
+        <p id="tagline">Who's a clever boy?</p>
+        
+      </div>
+    </a>
 
     <hr> {% block content %} {% endblock %}
     <hr>
-    <p>Copyright 2018. 🐾</p>
+    <a href="{{ url_for('users_index') }}">Browse all philosophers</a> 🐾
+    <a href="{{ url_for('tags_index') }}">Browse all tags</a>
+    <p>Copyright 2018.</p>
   </div>
 </body>
 

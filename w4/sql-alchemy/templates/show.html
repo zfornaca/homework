@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Cheese details</h1>
+<ul>
+  <li>Cheese: {{ cheese.name }}</li>
+  <li>Country of origin: {{ cheese.origin }}</li>
+  <li>Rating (out of 5): {{ cheese.rating }}</li>
+
+</ul>
+<p><a href="{{ url_for('index') }}">Return to the full list.</a></p>
+<p><a href="{{ url_for('edit', id=cheese.id) }}">Edit the {{ cheese.name }} profile.</a></p>
+<p><a href="{{ url_for('destroy', id=cheese.id) }}?_method=DELETE" method="POST">Delete {{ cheese.name }}.</a></p>
+
+
+
+{% endblock %}

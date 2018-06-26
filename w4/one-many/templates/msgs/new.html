@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>{{ user.first_name }} {{ user.last_name }} speaks:</h1>
+<h1>{{ user.first_name }} {{ user.last_name }} speaks</h1>
 
 <form action="{{url_for('msgs_index', user_id=user.id)}}" method="POST">
 <p>
@@ -9,22 +9,23 @@
 </p>
 
 
-{% for tag in tags %}
+  {% for tag in tags %}
+  
+  <input type="checkbox" value="{{ tag.id }}" id="tag_{{ tag.id }}" name="tags">
+  <label for="tag_{{ tag.id }}">{{ tag.tagname }}</label>
+  
+  {% endfor %}
+  
 
-<input type="checkbox" value="{{ tag.id }}" id="tag_{{ tag.id }}" name="tags">
-<label for="tag_{{ tag.id }}">{{ tag.tagname }}</label>
-
-{% endfor %}
-
-
-
+<p>
+  
   <button type="submit">So speaks {{ user.first_name }} {{ user.last_name }}</button>
-
+  
+</p>
 
 
 
 </form>
-<hr>
 <a href="{{ url_for('msgs_index', user_id=user.id) }}">See all wisdom of {{ user.first_name }} {{ user.last_name }}</a>
 
 {% endblock %}

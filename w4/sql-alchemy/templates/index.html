@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>HEY DO YOU LIKE CHEESES</h1>
+<ul>
+{% for cheese in cheeses %}
+<li><a href="{{ url_for('show', id=cheese.id) }}">{{ cheese.name }}</a> ({{ cheese.origin }}) ({{ cheese.rating }})
+
+</li>
+{% endfor %}
+
+</ul>
+
+<p>WELL I GOT HER NUMBER</p>
+<h1>HOW ABOUT THEM CHEESES</h1>
+
+<p>
+
+    <a href="{{ url_for('new') }}">Add a new cheese.</a>
+  </p>
+  
+
+{% endblock %}

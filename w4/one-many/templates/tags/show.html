@@ -1,9 +1,8 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Regarding the {{ tag.tagname }} tag</h1>
+<h1>Quotes tagged '{{ tag.tagname }}'</h1>
 <p>
-  <a href="{{ url_for('tags_index') }}">View all tags</a> 🐾 
-  <a href="{{ url_for('tags_edit', tag_id=tag.id) }}">Edit the {{ tag.tagname }} tag</a> 🐾 
-  <a href="{{ url_for('tags_destroy', tag_id=tag.id) }}?_method=DELETE" method="POST">Remove {{ tag.tagname }} tag from the database.</a>
+  <a href="{{ url_for('tags_edit', tag_id=tag.id) }}">Edit the '{{ tag.tagname }}' tag</a> 🐾 
+  <a href="{{ url_for('tags_destroy', tag_id=tag.id) }}?_method=DELETE" method="POST">Remove the '{{ tag.tagname }}' tag</a>
 </p>
 
 

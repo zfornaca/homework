@@ -37,8 +37,28 @@
     </div>
     <div class="card p-0 mb-3 col-12 col-md-6 col-lg-4 col-xl-3">
       {% if pet.photo_url %}
-      <img class="img-responsive image-profile" src="{{ pet.photo_url }}"> {% else %}
-      <img class="img-responsive image-profile" src="https://openclipart.org/download/283092/polite.svg"> {% endif %}
+
+      <img class="img-responsive image-resize" src="{{ pet.photo_url }}">
+      <!-- if pet.species == 'cat' -->
+      {% elif pet.species == 'cat' %}
+      <img class="img-responsive image-resize" src="https://openclipart.org/download/283092/polite.svg">
+      
+      {% elif pet.species == 'dog' %}
+      <!-- if pet.species == 'dog' -->
+      <img class="img-responsive image-resize" src="http://getdrawings.com/images/cute-dog-face-drawing-29.jpg">
+      
+      
+      
+      {% elif pet.species == 'porcupine' %}
+      <!-- if pet.species == 'porcupine' -->
+      <img class="img-responsive image-resize" src="https://i.pinimg.com/originals/09/0f/cf/090fcf9c294bda645936bbbfb455ea75.jpg">
+      
+      
+
+
+
+
+      {% endif %}
 
     </div>
   </div>

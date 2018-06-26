@@ -8,7 +8,9 @@
     <input id="tagname" name="tagname" type="text" placeholder="Name of tag" />
   </p>  
 
-<p>Apply to existing quotes?</p>
+<p><em>Apply to existing quotes?</em></p>
+
+<div class="lefty">
 
 {% for msg in msgs %}
 <p>
@@ -18,7 +20,7 @@
   </label>
 </p>
 {% endfor %}
-
+</div>
   <p>
     <button type="submit">Create new tag</button>
   </p>

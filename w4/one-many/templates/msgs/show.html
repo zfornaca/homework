@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>{{ msg.user.first_name }}'s message:</h1>
+<h1>A timeless pearl from {{ msg.user.first_name }} {{ msg.user.last_name }}</h1>
 
 <div id="flexquote">
   <div class="inline"><p>"{{ msg.content }}"</p><p><em>—{{msg.user.first_name}} {{msg.user.last_name}}</em></p></div>

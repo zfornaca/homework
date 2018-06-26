@@ -1,5 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Add a new user</h1>
+
+{% for flash in get_flashed_messages() %}
+<div>
+  <h5>{{ flash }}</h5>
+</div>
+{% endfor %}
+
+<h1>Add a new philosopher</h1>
 
 <form action="{{ url_for('users_create') }}" method="POST">
   <p>
@@ -15,18 +22,17 @@
 
   <p>
       <label for="image_url">Headshot:</label>
-      <input id="image_url" name="image_url" type="text" placeholder="Headshot" />
+      <input id="image_url" name="image_url" type="text" placeholder="Image URL" />
     </p>
   
 
   <p>
-    <button type="submit">Create new user</button>
+    <button type="submit">Create new philosopher</button>
   </p>
 
 </form>
 <p>
 
-  <a href="{{ url_for('users_index') }}">Return to the main list.</a>
 </p>
 
 {% endblock %}

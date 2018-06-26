@@ -15,9 +15,9 @@
   {% endfor %}
 
 <p>
-  <a href="{{url_for('msgs_new', user_id=user.id)}}">Add a quote from {{ user.first_name }} {{ user.last_name }}</a> 🐾 
+  <a href="{{url_for('msgs_new', user_id=user.id)}}">Add a new quote from {{ user.first_name }} {{ user.last_name }}</a> 🐾 
 <a href="{{url_for('users_show', user_id=user.id)}}">
-  Return to {{ user.first_name }} {{ user.last_name }}'s profile
+  Return to their profile
 </a>
 
 </p>

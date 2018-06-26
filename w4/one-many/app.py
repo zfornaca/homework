@@ -1,23 +1,22 @@
-# navigation woes: kinda confusing, can't get back from tags
-# styling: "link to list of tags" on homepage is serif
-# some of my url_fors seem a little confused even if things work
-# like, is that really where I want to be linked to? UX stuff.
+# Re: #7 ("Can you think of a way to improve the performance") the answer is no.
+# need to make tags visible on messages page (e.g. Socrates/kindling should have 'scrappy')
 
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, url_for, redirect, render_template, flash
 from flask_modus import Modus
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost/one_many"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+# app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "infinitesadness"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 modus = Modus(app)
 db = SQLAlchemy(app)
-toolbar = DebugToolbarExtension(app)
+
+# toolbar = DebugToolbarExtension(app)
 
 
 class User(db.Model):
@@ -63,7 +62,7 @@ def page_not_found(e):
 
 
 ###############
-### USER ROUTES
+# USER ROUTES
 ###############
 
 
@@ -89,6 +88,9 @@ def users_new():
 @app.route("/users", methods=["POST"])
 def users_create():
     """Create a new user and return to the list of all users."""
+    if request.form['first_name'] == "":
+        flash("A first name is required.")
+        return redirect(url_for("users_new"))
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     image_url = request.form['image_url']
@@ -128,13 +130,14 @@ def users_update(user_id):
     user = User.query.get(user_id)
     user.first_name = request.form['first_name']
     user.last_name = request.form['last_name']
+    user.image_url = request.form['image_url']
     db.session.add(user)
     db.session.commit()
     return redirect(url_for("users_show", user_id=user.id))
 
 
 ##################
-### MESSAGE ROUTES
+# MESSAGE ROUTES
 ##################
 
 
@@ -192,7 +195,7 @@ def msgs_edit(msg_id):
 
 @app.route("/msgs/<int:msg_id>", methods=["PATCH"])
 def msgs_update(msg_id):
-    """Update selected message and redirect to lsit of messages."""
+    """Update selected message and redirect to list of messages."""
     msg = Message.query.get_or_404(msg_id)
     msg.content = request.form['content']
     tag_ids = [int(num) for num in request.form.getlist("tags")]
@@ -204,7 +207,7 @@ def msgs_update(msg_id):
 
 
 ##############
-### TAG ROUTES
+# TAG ROUTES
 ##############
 
 

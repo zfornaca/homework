@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>The wonderful world of {{ name }}</h1>
+
+<p>As an expert snacker, you know {{ name }} is one of the greatest snacks around. Still, perhaps you feel it's time for a change.
+Here, please feel free to rename or recategorize this illustrious snack, or even remove it from our database (for now).</p>
+
+<form action="/PLACEHOLDER" method="POST">
+<p>Rename the {{ name }}? <input type="text" name="name" value="{{ name }}"></p>
+<p>Pick a new snack type? <input type="text" name="kind" value="{{ kind }}"></p>
+<p>Remove snack altogether?<input type="checkbox" name="remove" value="yes">
+<p><button type="submit">Adjust snack</button></p>
+</form>
+
+{% endblock %}
