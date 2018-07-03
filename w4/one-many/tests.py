@@ -1,6 +1,18 @@
 import unittest
 from app import app, User, Message
 
+# TESTING CHANGES BASED ON LOGIN IMPLEMENTATION
+#
+# users_index()
+# * presence of login/create acct text relative to login status
+# * presence of known user's name in list
+# register()
+# * redirect to login page
+# * new user added to db
+# login()
+# * redirect to index page
+# * session['user_id'] exists
+
 
 class MessagesTests(unittest.TestCase):
     def test_msgs_index(self):

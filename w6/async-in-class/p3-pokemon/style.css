@@ -1,0 +1,22 @@
+img {
+  width: 200px;
+  height: auto;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.pokeman {
+  width: 25%;
+  align-content: center;
+  border: 3px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 3px;
+  display: inline-block;
+}

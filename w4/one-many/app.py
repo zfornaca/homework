@@ -1,3 +1,7 @@
+# todo
+# * should usernames be unique?
+# * empty strings being accepted for NOT NULL fields (again)
+
 from flask import Flask, request, url_for, redirect, render_template, flash, session
 from flask_modus import Modus
 # from flask_debugtoolbar import DebugToolbarExtension
