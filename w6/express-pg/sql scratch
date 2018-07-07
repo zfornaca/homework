@@ -28,8 +28,44 @@ INSERT INTO companies (name, logo) values
 ('Nakatomi Trading Corp.', 'https://ih1.redbubble.net/image.506058298.5768/flat,550x550,075,f.u8.jpg'),
 ('Spacely Space Sprockets', 'http://images.assettype.com/tgdaily%2F2016-09%2F236a5bd9-d358-4ba7-84d2-2cdb0fa5b6d6%2F20110421b_feature_image.jpg?fit=crop&crop=faces,top,right&w=1040');
 
+CREATE TABLE jobs (id SERIAL PRIMARY KEY,
+title TEXT NOT NULL,
+salary INTEGER NOT NULL,
+equity FLOAT,
+company_id INTEGER REFERENCES companies (id) ON DELETE CASCADE);
 
+INSERT INTO jobs (title, salary, equity, company_id) VALUES
+('pencil pusher', 30000, 5, 2),
+('code monkey', 80000, 4, 2),
+('well-compensated narcissist', 100000, 99, 3),
+('brown-noser', 23000, 0, 3),
+('nose-browner', 46000, 2, 4),
+('golden parachutist', 300000, 9999999, 4),
+('son of the founder', 200000, 23456, 4);
 
+CREATE TABLE jobs_users (id SERIAL PRIMARY KEY,
+job_id INTEGER REFERENCES jobs (id) ON DELETE CASCADE,
+user_id INTEGER REFERENCES users (id) ON DELETE CASCADE);
+
+job ids 3, 4, 5, 6, 7
+user ids 2, 3, 5, 7, 9
+
+INSERT INTO jobs_users (job_id, user_id) VALUES
+(3,2), (3,3), (3,5), (3,7), (3,9),
+(4,3), (4,5), (4,9),
+(5,5),
+(7,2), (7,3), (7,5), (7,7);
+
+SELECT u.first_name, j.title FROM users u
+JOIN jobs_users ju ON u.id = ju.user_id
+JOIN jobs j ON j.id = ju.job_id; 
+
+CREATE TABLE bill_product (
+  bill_id    int REFERENCES bill (bill_id) ON UPDATE CASCADE ON DELETE CASCADE
+, product_id int REFERENCES product (product_id) ON UPDATE CASCADE
+, amount     numeric NOT NULL DEFAULT 1
+, CONSTRAINT bill_product_pkey PRIMARY KEY (bill_id, product_id)  -- explicit pk
+);
 
 
 GET USERS (all)
@@ -61,6 +97,22 @@ http POST localhost:3000/companies name='Initech' logo='https://res.cloudinary.c
 PATCH COMPANIES
 http PATCH localhost:3000/companies/1 name='Initech' logo='https://res.cloudinary.com/teepublic/image/private/s--Ns5e8YwK--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1516014631/production/designs/2280731_0.jpg'
 
-
 DELETE COMPANIES
 http DELETE localhost:3000/companies/6
+
+===
+
+GET JOBS (all)
+http localhost:3000/jobs
+
+GET JOBS (one)
+http localhost:3000/jobs/3
+
+POST JOBS
+http POST localhost:3000/jobs title='black panther' salary=1000000000 equity=0 company_id=3
+
+PATCH JOBS (need to do the POST first)
+http PATCH localhost:3000/jobs/10 title='king' salary=1000000001 equity=1 company_id=3
+
+DELETE JOBS (son of the founder)
+http DELETE localhost:3000/jobs/7
