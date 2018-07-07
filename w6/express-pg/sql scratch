@@ -1,0 +1,66 @@
+CREATE TABLE users (id SERIAL PRIMARY KEY,
+first_name TEXT NOT NULL,
+last_name TEXT NOT NULL,
+email TEXT NOT NULL,
+photo TEXT,
+company_id INTEGER REFERENCES companies (id) ON DELETE CASCADE);
+
+INSERT INTO users (first_name, last_name, email, photo, company_id) values
+('Sleve', 'McDichael', 'smd@email.com', 'https://image.shutterstock.com/image-photo/happy-businessman-isolated-handsome-man-260nw-609414131.jpg', 1),
+('Bobson', 'Dugnutt', 'bd@email.com', 'https://images.pexels.com/photos/842567/pexels-photo-842567.jpeg?auto=compress&cs=tinysrgb&h=350', 3),
+('Mario', 'Mcrlwain', 'mmr@email.com', 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3833242.jpg', 5),
+('Mike', 'Truk', 'mt@email.com', 'https://previews.123rf.com/images/vadimgozhda/vadimgozhda1503/vadimgozhda150300892/37257983-handsome-businessman-is-working-with-laptop-in-office-is-looking-at-the-camera-.jpg', 2),
+('Dwigt', 'Rortugal', 'dr@email.com', 'http://www.michellgroup.com/wp-content/uploads/2014/06/Business-Dad.jpg', 5),
+('Tim', 'Sandaele', 'ts@email.com', 'https://thumbs.dreamstime.com/b/happy-businessman-okay-sign-white-background-showing-31657077.jpg', 2),
+('Karl', 'Dandleton', 'kd@email.com', 'https://thumbs.dreamstime.com/b/happy-businessman-man-okay-sign-portrait-white-background-business-showing-31054645.jpg', 4),
+('Mike', 'Sernandez', 'ms@email.com', 'https://st.depositphotos.com/1771835/2738/i/950/depositphotos_27388449-stock-photo-happy-businessman-okay-sign-isolated.jpg', 1),
+('Todd', 'Bonzalez', 'tb@email.com', 'http://www.mortgagecalculatorplugin.com/wp-content/uploads/2017/04/Businessman.jpg', 3);
+
+
+CREATE TABLE companies (id SERIAL PRIMARY KEY,
+name TEXT NOT NULL,
+logo TEXT);
+
+INSERT INTO companies (name, logo) values
+('MomCorp', 'https://res.cloudinary.com/teepublic/image/private/s--AHL2aAiC--/t_Preview/b_rgb:d3ddd8,c_limit,f_jpg,h_630,q_90,w_630/v1446232468/production/designs/236811_1.jpg'),
+('Acme', 'https://i.pinimg.com/originals/82/be/7c/82be7c713e89b94d2a6f6a8c16bacf03.png'),
+('Stark Industries', 'https://images-na.ssl-images-amazon.com/images/I/510lvzoYXrL._SL1000_.jpg'),
+('Nakatomi Trading Corp.', 'https://ih1.redbubble.net/image.506058298.5768/flat,550x550,075,f.u8.jpg'),
+('Spacely Space Sprockets', 'http://images.assettype.com/tgdaily%2F2016-09%2F236a5bd9-d358-4ba7-84d2-2cdb0fa5b6d6%2F20110421b_feature_image.jpg?fit=crop&crop=faces,top,right&w=1040');
+
+
+
+
+
+GET USERS (all)
+http localhost:3000/users
+
+GET USERS (one)
+http localhost:3000/users/1
+
+POST USERS
+http POST localhost:3000/users first_name='Brumo' last_name='Jafes' email='bj@email.com' photo='x.jpg'
+
+PATCH USERS
+http PATCH localhost:3000/users/7 first_name='Brumo' last_name='Jafes' email='bj@email.com' photo='x.jpg'
+
+DELETE USERS
+http DELETE localhost:3000/users/8
+
+===
+
+GET COMPANIES (all)
+http localhost:3000/companies
+
+GET COMPANIES (one)
+http localhost:3000/companies/1
+
+POST COMPANIES
+http POST localhost:3000/companies name='Initech' logo='https://res.cloudinary.com/teepublic/image/private/s--Ns5e8YwK--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1516014631/production/designs/2280731_0.jpg'
+
+PATCH COMPANIES
+http PATCH localhost:3000/companies/1 name='Initech' logo='https://res.cloudinary.com/teepublic/image/private/s--Ns5e8YwK--/t_Preview/b_rgb:ffffff,c_limit,f_jpg,h_630,q_90,w_630/v1516014631/production/designs/2280731_0.jpg'
+
+
+DELETE COMPANIES
+http DELETE localhost:3000/companies/6
