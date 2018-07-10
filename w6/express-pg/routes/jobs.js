@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/index');
+const bcrypt = require('bcrypt');
+const jsonwebtoken = require('jsonwebtoken');
+const { ensureLoggedIn, ensureCorrectUser } = require('../middleware/auth.js');
 
 // POST /jobs
 router.post('', async function(req, res, next) {
@@ -16,7 +19,7 @@ router.post('', async function(req, res, next) {
 });
 
 // GET /jobs
-router.get('', async function(req, res, next) {
+router.get('', ensureLoggedIn, async (req, res, next) => {
   try {
     const data = await db.query('SELECT * FROM jobs');
     return res.json(data.rows);
@@ -26,7 +29,7 @@ router.get('', async function(req, res, next) {
 });
 
 // GET /jobs/:id
-router.get('/:id', async function(req, res, next) {
+router.get('/:id', ensureLoggedIn, async (req, res, next) => {
   try {
     const data = await db.query('SELECT * FROM jobs WHERE id=$1', [
       req.params.id

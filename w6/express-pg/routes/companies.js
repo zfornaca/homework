@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/index');
+const bcrypt = require('bcrypt');
+const jsonwebtoken = require('jsonwebtoken');
+const { ensureLoggedIn, ensureCorrectUser } = require('../middleware/auth.js');
 
 // GET /companies
-router.get('', async function(req, res, next) {
+router.get('', ensureLoggedIn, async (req, res, next) => {
   try {
     const data = await db.query('SELECT * FROM companies');
     return res.json(data.rows);
@@ -13,7 +16,7 @@ router.get('', async function(req, res, next) {
 });
 
 // GET /companies/:id
-router.get('/:id', async function(req, res, next) {
+router.get('/:id', ensureLoggedIn, async (req, res, next) => {
   try {
     const companyData = await db.query('SELECT * FROM companies WHERE id=$1', [
       req.params.id
