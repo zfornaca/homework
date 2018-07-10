@@ -3,7 +3,10 @@ const router = express.Router();
 const db = require('../db/index');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const { ensureLoggedIn, ensureCorrectUser } = require('../middleware/auth.js');
+const {
+  ensureLoggedIn,
+  ensureCorrectCompany
+} = require('../middleware/auth.js');
 
 // GET /companies
 router.get('', ensureLoggedIn, async (req, res, next) => {
@@ -36,9 +39,10 @@ router.get('/:id', ensureLoggedIn, async (req, res, next) => {
 // POST /companies
 router.post('', async function(req, res, next) {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const data = await db.query(
-      `INSERT INTO companies (name, logo) VALUES ($1, $2) RETURNING *`,
-      [req.body.name, req.body.logo]
+      `INSERT INTO companies (name, logo, handle, password) VALUES ($1, $2, $3, $4) RETURNING *`,
+      [req.body.name, req.body.logo, req.body.handle, hashedPassword]
     );
     return res.json(data.rows[0]);
   } catch (err) {
@@ -46,12 +50,42 @@ router.post('', async function(req, res, next) {
   }
 });
 
-// PATCH /companies/:id
-router.patch('/:id', async function(req, res, next) {
+// POST /users/auth
+router.post('/auth', async (req, res, next) => {
   try {
+    const companyData = await db.query(
+      'SELECT * FROM companies WHERE handle=$1',
+      [req.body.handle]
+    );
+    if (companyData.rows.length === 0)
+      return res.json({ message: 'Invalid company handle' });
+
+    const result = await bcrypt.compare(
+      req.body.password,
+      companyData.rows[0].password
+    );
+    if (!result) return res.json({ message: 'Invalid password' });
+
+    const token = jsonwebtoken.sign(
+      {
+        id: companyData.rows[0].id,
+        acctType: 'company'
+      },
+      'CONTIGO'
+    );
+    return res.json({ token });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// PATCH /companies/:id
+router.patch('/:id', ensureCorrectCompany, async (req, res, next) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const data = await db.query(
-      'UPDATE companies SET name=$1, logo=$2 WHERE id=$3 RETURNING *',
-      [req.body.name, req.body.logo, req.params.id]
+      'UPDATE companies SET name=$1, logo=$2, password=$3 WHERE id=$4 RETURNING *',
+      [req.body.name, req.body.logo, hashedPassword, req.params.id]
     );
     return res.json(data.rows[0]);
   } catch (err) {
@@ -60,13 +94,12 @@ router.patch('/:id', async function(req, res, next) {
 });
 
 // DELETE /companies/:id
-router.delete('/:id', async function(req, res, next) {
+router.delete('/:id', ensureCorrectCompany, async (req, res, next) => {
   try {
-    const data = await db.query(
-      'DELETE FROM companies WHERE id=$1 RETURNING *',
-      [req.params.id]
-    );
-    return res.json(data.rows[0]);
+    await db.query('DELETE FROM companies WHERE id=$1 RETURNING *', [
+      req.params.id
+    ]);
+    return res.json({ message: 'Company deleted' });
   } catch (err) {
     return next(err);
   }

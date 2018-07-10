@@ -124,9 +124,9 @@ IV
 x_ 1) add column to users table (users) 
 x_ 2) add column to users table (password) (hashed)
 x_ 3) add new route, /auth, to return JWT
-4) login-protect several routes
-x_  4a GET /users
-x_  4b GET /users/id
+x_ 4) login-protect several routes
+x_ 4a GET /users
+x_ 4b GET /users/id
 x_ 4c GET /jobs
 x_ 4d GET /jobs/:id
 x_ 4e GET /companies
@@ -136,3 +136,23 @@ x_  5a PATCH /users/:id
 x_  5b DELETE /users/:id
 
 V
+x_ 1) add column to companies table (handle)
+x_ 2) add column to companies table (password) (hashed)
+x_ 3) add new route, /auth, to return JWT (store ID of logged in co)
+x_ 4) login-protect several routes
+x-  4a GET /users
+x_  4b GET /users/id
+x_  4c GET /jobs
+x_  4d GET /jobs/:id
+x_  4e GET /companies
+x_  4f GET /companies/:id
+5) correct-user-protect two routes
+x_  5a PATCH /companies/:id
+x_  5b DELETE /companies/:id
+6) only companies should be able to post jobs
+x_  6a POST /jobs
+7) only the company that posted the job should be able to update/delete it
+x_  7a PATCH /jobs/:id
+x_  7b DELETE /jobs/:id
+
+x_ YO, USERS.JS, PATCH, PLAIN TEXT PASSWORDS (fixed? but untested)

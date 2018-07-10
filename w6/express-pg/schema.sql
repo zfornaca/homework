@@ -6,14 +6,16 @@ CREATE DATABASE "jobbotron";
 
 CREATE TABLE companies (id SERIAL PRIMARY KEY,
 name TEXT NOT NULL,
-logo TEXT);
+logo TEXT,
+handle TEXT UNIQUE NOT NULL,
+password TEXT NOT NULL);
 
-INSERT INTO companies (name, logo) values
-('MomCorp', 'https://res.cloudinary.com/teepublic/image/private/s--AHL2aAiC--/t_Preview/b_rgb:d3ddd8,c_limit,f_jpg,h_630,q_90,w_630/v1446232468/production/designs/236811_1.jpg'),
-('Acme', 'https://i.pinimg.com/originals/82/be/7c/82be7c713e89b94d2a6f6a8c16bacf03.png'),
-('Stark Industries', 'https://images-na.ssl-images-amazon.com/images/I/510lvzoYXrL._SL1000_.jpg'),
-('Nakatomi Trading Corp.', 'https://ih1.redbubble.net/image.506058298.5768/flat,550x550,075,f.u8.jpg'),
-('Spacely Space Sprockets', 'http://images.assettype.com/tgdaily%2F2016-09%2F236a5bd9-d358-4ba7-84d2-2cdb0fa5b6d6%2F20110421b_feature_image.jpg?fit=crop&crop=faces,top,right&w=1040');
+INSERT INTO companies (name, logo, handle, password) values
+('MomCorp', 'https://res.cloudinary.com/teepublic/image/private/s--AHL2aAiC--/t_Preview/b_rgb:d3ddd8,c_limit,f_jpg,h_630,q_90,w_630/v1446232468/production/designs/236811_1.jpg', 'mom', 'pass'),
+('Acme', 'https://i.pinimg.com/originals/82/be/7c/82be7c713e89b94d2a6f6a8c16bacf03.png', 'ac-atac', 'pass'),
+('Stark Industries', 'https://images-na.ssl-images-amazon.com/images/I/510lvzoYXrL._SL1000_.jpg', 'strak', 'pass'),
+('Nakatomi Trading Corp.', 'https://ih1.redbubble.net/image.506058298.5768/flat,550x550,075,f.u8.jpg', 'nktm', 'pass'),
+('Spacely Space Sprockets', 'http://images.assettype.com/tgdaily%2F2016-09%2F236a5bd9-d358-4ba7-84d2-2cdb0fa5b6d6%2F20110421b_feature_image.jpg?fit=crop&crop=faces,top,right&w=1040', 'sss', 'pass');
 
 
 CREATE TABLE users (id SERIAL PRIMARY KEY,

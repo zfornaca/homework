@@ -22,8 +22,8 @@ router.post('/auth', async (req, res, next) => {
 
     const token = jsonwebtoken.sign(
       {
-        username: userData.rows[0].username,
-        id: userData.rows[0].id
+        id: userData.rows[0].id,
+        acctType: 'individual'
       },
       'CONTIGO'
     );
@@ -80,6 +80,7 @@ router.post('', async (req, res, next) => {
 // PATCH /users/:id
 router.patch('/:id', ensureCorrectUser, async (req, res, next) => {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const data = await db.query(
       'UPDATE users SET first_name=$1, last_name=$2, email=$3, photo=$4, password=$5 WHERE id=$6 RETURNING *',
       [
@@ -87,7 +88,7 @@ router.patch('/:id', ensureCorrectUser, async (req, res, next) => {
         req.body.last_name,
         req.body.email,
         req.body.photo,
-        req.body.password,
+        hashedPassword,
         req.params.id
       ]
     );
