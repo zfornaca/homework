@@ -1,0 +1,25 @@
+.pokeDex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pokeCard {
+  /* background-color: bisque; */
+  border-radius: 5px;
+  border: bisque 3px solid;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  font-family: 'Gaegu', cursive;
+  width: 300px;
+}
+
+.pokeCard img {
+  width: 50%;
+  height: 50%;
+}
+
+.pokeName {
+  font-size: 300%;
+}
