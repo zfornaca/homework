@@ -1,0 +1,7 @@
+.Square {
+  background-color: blue;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  margin: 0em 0.125em 0em 0.125em;
+}
