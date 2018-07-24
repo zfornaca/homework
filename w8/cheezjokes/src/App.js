@@ -49,17 +49,32 @@ class App extends Component {
   handleUpvote = id => {
     const updatedJokes = this.state.jokes.map(joke => {
       if (joke.id === id) {
-        return { ...joke, yay: joke.yay++ };
+        return { ...joke, yay: joke.yay + 1 };
       }
       return joke;
     });
+    this.setState({ jokes: updatedJokes, message: '' });
+  };
+
+  handleDownvote = id => {
+    const updatedJokes = this.state.jokes.map(joke => {
+      if (joke.id === id) {
+        return { ...joke, boo: joke.boo + 1 };
+      }
+      return joke;
+    });
+    this.setState({ jokes: updatedJokes, message: '' });
   };
 
   render() {
     if (this.state.message.length === 0) {
       return (
         <div className="App">
-          <JokeList jokes={this.state.jokes} />
+          <JokeList
+            jokes={this.state.jokes}
+            upvote={this.handleUpvote}
+            downvote={this.handleDownvote}
+          />
           <button onClick={this.getNewJokes}>Get new jokes!</button>
         </div>
       );
