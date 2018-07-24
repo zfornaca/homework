@@ -1,0 +1,101 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#soda {
+  background-image: url(https://media.giphy.com/media/7MRLlM8dTSQgM/giphy.gif);
+  height: 100vh;
+}
+
+#soda h1 {
+  color: palevioletred;
+  font-size: 500%;
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+  padding-top: 50vh;
+}
+
+#soda h3 {
+  color: white;
+  margin: 0 auto;
+  width: 90%;
+  font-size: 200%;
+  text-align: center;
+}
+
+#soda a {
+  text-decoration: none;
+  color: white;
+}
+
+#chips {
+  text-align: center;
+}
+
+#chips button {
+  font-size: 200%;
+  margin: 0 auto;
+  width: 30%;
+}
+
+#chips h4 {
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+}
+
+#sardines {
+  text-align: center;
+}
+
+#vending-hello {
+  text-align: center;
+}
+
+#vending {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100;
+  /* border: 3px black solid; */
+}
+
+#vending img {
+  width: 30%;
+  height: 100%;
+}
+
+#menu {
+  padding: 10px;
+  text-align: center;
+}
