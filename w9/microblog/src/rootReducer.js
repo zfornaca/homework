@@ -12,10 +12,34 @@ export default function rootReducer(state = INITIAL_STATE, action) {
     return {
       posts: [
         ...state.posts,
-        { title: action.title, body: action.body, id: uuid() }
+        { title: action.title, body: action.body, id: uuid(), isEditing: false }
       ]
     };
   }
+  if (action.type === 'UPDATE_POST') {
+    return {
+      posts: state.posts.map(post => {
+        if (action.id === post.id) {
+          post.title = action.title;
+          post.body = action.body;
+          post.isEditing = false;
+        }
+        return post;
+      })
+    };
+  }
+
+  if (action.type === 'TOGGLE_EDITING') {
+    return {
+      posts: state.posts.map(post => {
+        if (action.id === post.id) {
+          post.isEditing = !post.isEditing;
+        }
+        return post;
+      })
+    };
+  }
+
   if (action.type === 'DELETE_POST') {
     return {
       posts: state.posts.filter(post => action.id !== post.id)

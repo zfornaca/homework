@@ -6,6 +6,7 @@ export default class Post extends Component {
       <li>
         <h3>{this.props.title}</h3>
         <p>{this.props.body}</p>
+        <button onClick={this.props.toggleEdit}>Edit</button>
         <button onClick={this.props.deletePost}>X</button>
       </li>
     );
