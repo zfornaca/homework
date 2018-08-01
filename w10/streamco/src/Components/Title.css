@@ -1,0 +1,42 @@
+.Title {
+  /* background-color: black; */
+  /* width: 25em; */
+  /* display: block; */
+  width: 150px;
+  /* height: 225px; */
+  margin: 0.25em;
+}
+
+.imageBox {
+  width: 150px;
+  height: 225px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  background-color: rgb(33, 33, 33);
+  position: relative;
+  overflow: hidden;
+}
+
+.imageBox h2 {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  color: white;
+}
+
+.Title img {
+  width: 100%;
+  height: auto;
+}
+
+.Title p {
+  font-size: 75%;
+  margin-top: 0;
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}

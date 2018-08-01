@@ -1,0 +1,16 @@
+.TitleList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 30px 50px 0 50px;
+}
+
+#sectionTitle {
+  text-align: left;
+  color: white;
+  background-color: #333333;
+  padding: 2px;
+  padding-left: 50px;
+}

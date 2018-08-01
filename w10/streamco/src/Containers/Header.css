@@ -1,0 +1,28 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  padding: 0 50px 0 50px;
+  background: linear-gradient(lightsteelblue, steelblue);
+}
+
+.Header h1,
+.Header div,
+.Header h5,
+.Header btn {
+  display: inline-block;
+  color: white;
+}
+
+.Header h5 {
+  padding: 5px;
+}
+
+.Header button {
+  border-radius: 2px;
+  padding: 5px;
+  color: white;
+  background-color: #333333;
+  border: 0px;
+}
